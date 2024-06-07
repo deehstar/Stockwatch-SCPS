@@ -1,0 +1,36 @@
+<div>
+    <table>
+        <thead>
+            <tr>
+                <th>Company</th>
+                <th>Time</th>
+            @if (stocks[0] && stocks[0].stockTimeSeries[0] && stocks[0].stockTimeSeries[0]['1. open']) {
+                <th>Open</th>
+            }
+                
+                <th>High</th>
+                <th>Low</th>
+                <th>Close</th>
+                <th>Volume</th>
+            </tr>
+        </thead>
+        <tbody>
+            @for (stock of stocks; track $index){
+                @for (stockTimeSeries of stock?.stockTimeSeries; track $index) {
+                    <tr>
+                        <td>{{stock.name}}</td>
+                        <td>{{stockTimeSeries.timeStamp}}</td>
+                        <td>{{stockTimeSeries?.['1. open']}}</td>
+                        <td>{{stockTimeSeries?.['2. high']}}</td>
+                        <td>{{stockTimeSeries?.['3. low']}}</td>
+                        <td>{{stockTimeSeries?.['4. close']}}</td>
+                        <td>{{stockTimeSeries?.['5. volume']}}</td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+</div>
+<div>
+    <button (click)="updateStocks()">Refresh</button>
+</div>
